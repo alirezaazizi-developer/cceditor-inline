@@ -1,0 +1,33 @@
+/* This script wrote with Alireza Azizi */
+#user-input{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 40px;
+    border: 1px solid #646464;
+    background: #f3f3f3;
+}
+#user-input-title{
+    width: 100%;
+    height: 50px;
+    float: right;
+}
+#main-user-input{
+    width: 100%;
+    height: 150px;
+    float: right;
+}
+/* button and input setting */
+#editor-client-input{
+    margin-top: 10px;
+    width: 100%;
+    height: 25px;
+}
+#save-client-value{
+    width: 40px;
+    height: 25px;
+}
+#cancel-client-value{
+    width: 40px;
+    height: 25px;
+}
