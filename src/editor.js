@@ -169,7 +169,7 @@ function addProperty(property) {
 function addEditorFeature(feature) {
     switch (feature) {
         case "bold":
-            addProperty({"tag": "button", "func": "bold()", "ico": "b"});
+            addProperty({"tag": "button", "func": "bold()", "ico": "icon-heart-empty"});
             break;
         case "italic":
             addProperty({"tag": "button", "func": "italic()", "ico": "i"});

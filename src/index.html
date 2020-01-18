@@ -8,12 +8,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="./page.css">
     <link rel="stylesheet" href="./editor.css">
+    <link rel="stylesheet" href="./fontello/css/animation.css">
 </head>
 <body>
 <div id="main">
   {{message}}
 </div>
-<div id="btn"><div id="edit"><button id="editable">تغییر محتوا</button></div></div>
+<button id="data">selection</button>
+<div id="btn"><div id="edit"><button id="editable"><i class="demo-icon icon-align-justify"></i>ا</button></div></div>
 <script src="./vue.js"></script>
 <script src="./editor.js"></script>
 <script>
@@ -22,6 +24,13 @@
         data:{
             message:"hello that is a test"
         }
+    });
+    getElement("data").addEventListener("click" , function () {
+        // document.getElementById('m
+        let data = window.getSelection().toString();
+        console.log(data);
+        data = data.replace(data , "hello");
+        console.log(data);
     });
 </script>
 </body>
