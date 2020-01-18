@@ -106,12 +106,13 @@ function userInput(values) {
     let saveButton = document.createElement("button");
     saveButton.setAttribute("type", "button");
     saveButton.setAttribute("id", "save-client-value");
+    saveButton.setAttribute("onclick", "saveUserInput()");
     saveButton.innerText = "ذخیره";
 
     let cancelButton = document.createElement("button");
     cancelButton.setAttribute("type", "button");
     cancelButton.setAttribute("id", "cancel-client-value");
-    cancelButton.setAttribute("onclick" , "removeUserInput()");
+    cancelButton.setAttribute("onclick", "removeUserInput()");
     cancelButton.innerText = "خروج";
 
     /* append child */
@@ -123,6 +124,7 @@ function userInput(values) {
     input.appendChild(saveButton);
     input.appendChild(cancelButton);
 
+
 }
 
 
@@ -133,6 +135,10 @@ function removeUserInput() {
     targetElement.parentNode.removeChild(targetElement);
 }
 
+function saveUserInput() {
+    console.log(getElement("editor-client-input").value);
+    return getElement("editor-client-input").value;
+}
 
 /* end events and property document */
 
@@ -142,7 +148,7 @@ function addProperty(property) {
     if (property.tag === "button") {
         properties.setAttribute("onclick", property.func);
         properties.innerText = property.ico;
-    }else if(property.tag === "select" ){
+    } else if (property.tag === "select") {
         property.select.forEach(function (value) {
             properties.innerHTML += value;
         });
@@ -184,35 +190,44 @@ function addEditorFeature(feature) {
 
 /* under function is main function for run editor */
 function editor(attributes) {
-    let editor = document.createElement("div");
-    editor.setAttribute("id", "editor");
-    /* append child editor */
-    document.body.appendChild(editor);
-    /*
-     *change tag content to editable mode
-     * so content become editable
-    */
-    let content = getElement(attributes.edit.id).contentEditable = "true";
-    /* continue editor tools */
-    attributes.attributes.forEach(function (properties) {
-        addEditorFeature(properties);
-    });
-
-
+    if (getElement("editor") == null){
+        let editor = document.createElement("div");
+        editor.setAttribute("id", "editor");
+        /* append child editor */
+        document.body.appendChild(editor);
+        /*
+         *change tag content to editable mode
+         * so content become editable
+        */
+        let content = getElement(attributes.edit.id).contentEditable = "true";
+        /* continue editor tools */
+        attributes.attributes.forEach(function (properties) {
+            addEditorFeature(properties);
+        });
+    }
+    else{
+        console.log("editor exist");
+    }
 }
-
 
 
 /* content export */
 function exportContent() {
 
+    return getElement()
+
 }
 
-editor({
-    "edit": {
-        "id": "main"
-    },
-    "attributes": ["bold", "italic", "underline", "link" , "justify-center" , "justify-right" , "justify-left"]
-});
-userInput({"title":"hell world"});
+function runEditor() {
+    getElement("editable").addEventListener("click", function () {
+        editor({
+            "edit": {
+                "id": "main"
+            },
+            "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left"]
+        });
 
+    });
+}
+
+runEditor();
