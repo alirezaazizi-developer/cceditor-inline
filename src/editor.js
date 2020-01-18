@@ -10,17 +10,14 @@ function italic() {
 
 /* function create for external link */
 function createLink() {
-
-    let value = userInput({"title": "لطفا لینک مورد نظر را وارد کنید"});
+    let value = prompt("Enter link");
+    // let value = userInput({"title": "لطفا لینک مورد نظر را وارد کنید"});
     document.execCommand("createLink", null, value);
 }
 
 /* function strike */
-function strikeThrough(data) {
-    let selected = window.getSelection();
-    let strike = selected.toString();
-    strike = strike.strike();
-    selected.toString().replace(selected, select);
+function strikeThrough() {
+    document.execCommand("strikeThrough");
 }
 
 /* function for justifies */
@@ -62,12 +59,13 @@ function color(value) {
 }
 
 /* function for heading */
-function heading(value) {
-    document.execCommand("heading", null, value);
+function heading() {
+    let value = prompt("please write your tag");
+    document.execCommand("heading", false, "H3");
 }
 
 function addImage() {
-
+    let value;
 }
 
 /* function add editor */
@@ -140,6 +138,12 @@ function saveUserInput() {
     return getElement("editor-client-input").value;
 }
 
+/* remove editor */
+function removeEditorStyle() {
+    let e = getElement("editor");
+    e.parentNode.removeChild(e);
+}
+
 /* end events and property document */
 
 
@@ -148,6 +152,9 @@ function addProperty(property) {
     if (property.tag === "button") {
         properties.setAttribute("onclick", property.func);
         properties.innerText = property.ico;
+        let icon = document.createElement("i");
+        icon.setAttribute("class" , property.ico);
+        properties.appendChild(icon);
     } else if (property.tag === "select") {
         property.select.forEach(function (value) {
             properties.innerHTML += value;
@@ -182,6 +189,12 @@ function addEditorFeature(feature) {
         case "justify-left":
             addProperty({"tag": "button", "func": "justifyLeft()", "ico": "L"});
             break;
+        case "heading":
+            addProperty({"tag": "button", "func": "heading()", "ico": "H"});
+            break;
+        case "strikeThrough":
+            addProperty({"tag":"button","func":"strikeThrough()" , "ico":"s"});
+            break;
         default:
             throw "invalid property";
 
@@ -190,7 +203,13 @@ function addEditorFeature(feature) {
 
 /* under function is main function for run editor */
 function editor(attributes) {
-    if (getElement("editor") == null){
+    if (getElement("editor") == null) {
+
+        /* get parent text content edit able */
+        let editedWidth = getElement(edit.id).style.width;
+        alert(editedWidth);
+
+
         let editor = document.createElement("div");
         editor.setAttribute("id", "editor");
         /* append child editor */
@@ -204,8 +223,7 @@ function editor(attributes) {
         attributes.attributes.forEach(function (properties) {
             addEditorFeature(properties);
         });
-    }
-    else{
+    } else {
         console.log("editor exist");
     }
 }
@@ -220,14 +238,20 @@ function exportContent() {
 
 function runEditor() {
     getElement("editable").addEventListener("click", function () {
-        editor({
-            "edit": {
-                "id": "main"
-            },
-            "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left"]
-        });
+        if (getElement("main").contentEditable === "false") {
+            editor({
+                "edit": {
+                    "id": "main"
+                },
+                "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left", "heading" , "strikeThrough"]
+            });
+        } else {
+            getElement("main").contentEditable = "false";
+            //removeEditorStyle();
+        }
 
     });
+
 }
 
 runEditor();
