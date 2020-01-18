@@ -11,27 +11,53 @@
     <link rel="stylesheet" href="./fontello/css/animation.css">
 </head>
 <body>
-<div id="main">
-  {{message}}
+<div id="main" contenteditable="true">
+    hello this is a simple javascript text editor for use easy and
 </div>
 <button id="data">selection</button>
-<div id="btn"><div id="edit"><button id="editable"><i class="demo-icon icon-align-justify"></i>ا</button></div></div>
-<script src="./vue.js"></script>
-<script src="./editor.js"></script>
+<!--<div id="btn">-->
+<!--    <div id="edit">-->
+<!--        <button id="editable"><i class="demo-icon icon-align-justify"></i>ا</button>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<script src="./vue.js"></script>-->
+<!--<script src="./editor.js"></script>-->
 <script>
-    let vue = new Vue({
-        el:"#main" ,
-        data:{
-            message:"hello that is a test"
+
+    document.getElementById("data").addEventListener("click", function () {
+
+
+
+
+        let selection = window.getSelection().getRangeAt(0);
+        let selectedText = selection.extractContents();
+        let span = document.createElement("b");
+        // span.classList.add('h');
+        console.log(selectedText.textContent);
+        if (document.getElementById("main") )
+        /**/
+        span.innerHTML = selectedText.textContent;
+        console.log(span);
+        selection.insertNode(span);
+        if (selectedText.childNodes[1] !== undefined) {
+            console.log(selectedText.childNodes[1]);
+            $(selectedText.childNodes[1]).remove();
         }
-    });
-    getElement("data").addEventListener("click" , function () {
-        // document.getElementById('m
-        let data = window.getSelection().toString();
-        console.log(data);
-        data = data.replace(data , "hello");
-        console.log(data);
-    });
+        let txt = document.getElementById("Text").innerHTML = '';
+        document.getElementById("Text").innerHTML = txt.replace(/<\/span>(?:\s)*<span class="highlight">/g, '');
+        clearSelection();
+
+
+        function clearSelection() {
+            if (document.selection) {
+                document.selection.empty();
+            } else if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+        }
+
+    })
+    ;
 </script>
 </body>
 </html>
