@@ -111,6 +111,7 @@ function userInput(values) {
     let cancelButton = document.createElement("button");
     cancelButton.setAttribute("type", "button");
     cancelButton.setAttribute("id", "cancel-client-value");
+    cancelButton.setAttribute("onclick" , "removeUserInput()");
     cancelButton.innerText = "خروج";
 
     /* append child */
@@ -164,16 +165,16 @@ function addEditorFeature(feature) {
             addProperty({"tag": "button", "func": "underline()", "ico": "u"});
             break;
         case "link":
-            addProperty({"tag": "button", "function": "createLink()", "ico": "l"});
+            addProperty({"tag": "button", "func": "createLink()", "ico": "l"});
             break;
         case "justify-right":
-            addProperty({"tag": "button", "function": "justifyRight()", "ico": "R"});
+            addProperty({"tag": "button", "func": "justifyRight()", "ico": "R"});
             break;
         case "justify-center":
-            addProperty({"tag": "button", "function": "justifyCenter()", "ico": "C"});
+            addProperty({"tag": "button", "func": "justifyCenter()", "ico": "C"});
             break;
         case "justify-left":
-            addProperty({"tag": "button", "function": "justifyLeft", "ico": "L"});
+            addProperty({"tag": "button", "func": "justifyLeft()", "ico": "L"});
             break;
         default:
             throw "invalid property";
@@ -191,10 +192,7 @@ function editor(attributes) {
      *change tag content to editable mode
      * so content become editable
     */
-    let content = getElement(attributes.edit.id);
-    let addAttribute = document.createAttribute("contenteditable");
-    addAttribute.value = "true";
-    content.setAttributeNode(addAttribute);
+    let content = getElement(attributes.edit.id).contentEditable = "true";
     /* continue editor tools */
     attributes.attributes.forEach(function (properties) {
         addEditorFeature(properties);
@@ -204,8 +202,9 @@ function editor(attributes) {
 }
 
 
+
 /* content export */
-function exporContent() {
+function exportContent() {
 
 }
 
@@ -213,7 +212,7 @@ editor({
     "edit": {
         "id": "main"
     },
-    "attributes": ["bold", "italic", "underline", "link"]
+    "attributes": ["bold", "italic", "underline", "link" , "justify-center" , "justify-right" , "justify-left"]
 });
-
+userInput({"title":"hell world"});
 
