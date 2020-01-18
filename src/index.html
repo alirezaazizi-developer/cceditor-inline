@@ -34,7 +34,19 @@
         let span = document.createElement("b");
         // span.classList.add('h');
         console.log(selectedText.textContent);
-        if (document.getElementById("main") )
+
+        if (document.getElementById("main").contentEditable === "true"){
+            let main = document.getElementById("main").innerText;
+            console.log(main);
+            console.log(main.match("/"+selectedText.textContent+"/g"));
+            // if (main.match("")){
+            //     console.log("is right");
+            // }else{
+            //     console.log("is false");
+            // }
+        }else{
+            console.log("please change to content editable ");
+        }
         /**/
         span.innerHTML = selectedText.textContent;
         console.log(span);
