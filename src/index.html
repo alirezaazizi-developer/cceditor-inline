@@ -34,7 +34,7 @@
             /* second step get value selection */
             let selection = window.getSelection().getRangeAt(0);
             let selectedText = selection.extractContents();
-            let span = document.createElement(options.tag);
+            let tag = document.createElement(options.tag);
 
             /* get text content of window.selected */
             let content = selectedText.textContent;
@@ -46,9 +46,9 @@
             /*this condition for check top tip*/
             if (resultValidation === true) {
                 /* when result validation variable is true its mine user input is right change user value */
-                span.innerHTML = selectedText.textContent;
-                console.log(span);
-                selection.insertNode(span);
+                tag.innerHTML = selectedText.textContent;
+                console.log(tag);
+                selection.insertNode(tag);
                 if (selectedText.childNodes[1] !== undefined) {
                     console.log(selectedText.childNodes[1]);
                     selectedText.childNodes[1].removeChild(selectedText);
@@ -64,6 +64,7 @@
 
     document.getElementById("data").addEventListener("click", function () {
         main({editable:"main" , tag:"i"});
+        main({editable:"main" , tag:"b"});
     })
     ;
 </script>
