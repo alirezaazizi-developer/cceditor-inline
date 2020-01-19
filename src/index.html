@@ -24,50 +24,46 @@
 <!--<script src="./editor.js"></script>-->
 <script>
 
-    document.getElementById("data").addEventListener("click", function () {
+    function main(options) {
+        /* at first step get text value in container */
+        let main = document.getElementById(options.editable).innerText;
+        console.log(main);
+        /* this condition when run if dis div content editable is true */
+        if (document.getElementById(options.editable).contentEditable === "true") {
 
+            /* second step get value selection */
+            let selection = window.getSelection().getRangeAt(0);
+            let selectedText = selection.extractContents();
+            let span = document.createElement(options.tag);
 
+            /* get text content of window.selected */
+            let content = selectedText.textContent;
 
+            /* work with regex to validate user selected text with content editable text */
+            let regex = new RegExp(content);
+            let resultValidation = regex.test(main);
 
-        let selection = window.getSelection().getRangeAt(0);
-        let selectedText = selection.extractContents();
-        let span = document.createElement("b");
-        // span.classList.add('h');
-        console.log(selectedText.textContent);
+            /*this condition for check top tip*/
+            if (resultValidation === true) {
+                /* when result validation variable is true its mine user input is right change user value */
+                span.innerHTML = selectedText.textContent;
+                console.log(span);
+                selection.insertNode(span);
+                if (selectedText.childNodes[1] !== undefined) {
+                    console.log(selectedText.childNodes[1]);
+                    selectedText.childNodes[1].removeChild(selectedText);
+                }
 
-        if (document.getElementById("main").contentEditable === "true"){
-            let main = document.getElementById("main").innerText;
-            console.log(main);
-            console.log(main.match("/"+selectedText.textContent+"/g"));
-            // if (main.match("")){
-            //     console.log("is right");
-            // }else{
-            //     console.log("is false");
-            // }
-        }else{
+            } else {
+                console.log("is false");
+            }
+        } else {
             console.log("please change to content editable ");
         }
-        /**/
-        span.innerHTML = selectedText.textContent;
-        console.log(span);
-        selection.insertNode(span);
-        if (selectedText.childNodes[1] !== undefined) {
-            console.log(selectedText.childNodes[1]);
-            $(selectedText.childNodes[1]).remove();
-        }
-        let txt = document.getElementById("Text").innerHTML = '';
-        document.getElementById("Text").innerHTML = txt.replace(/<\/span>(?:\s)*<span class="highlight">/g, '');
-        clearSelection();
+    }
 
-
-        function clearSelection() {
-            if (document.selection) {
-                document.selection.empty();
-            } else if (window.getSelection) {
-                window.getSelection().removeAllRanges();
-            }
-        }
-
+    document.getElementById("data").addEventListener("click", function () {
+        main({editable:"main" , tag:"i"});
     })
     ;
 </script>
