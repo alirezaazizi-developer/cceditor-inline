@@ -1,3 +1,61 @@
+/**
+ * @licence MIT
+ * @author AlirezaAzizi
+ **/
+
+
+/* under function get user selection and change or add tag or remove tag or style */
+function inputText(options) {
+    /* this variable use for */
+    let tagname;
+    /* under switch for assignment tag name in a variable */
+    switch (options.tag) {
+        case "b":
+            tagname = "b";
+            break;
+        case "i":
+            tagname = "i";
+            break;
+        default:
+            throw ("HTML tag is not defined");
+    }
+    /* at first step get text value in container */
+    let mainContent = document.getElementById(options.editable).innerText;
+    console.log(mainContent);
+    /* this condition when run if dis div content editable is true */
+    if (document.getElementById(options.editable).contentEditable === "true") {
+
+        /* second step get value selection */
+        let selection = document.getSelection().getRangeAt(0);
+        let selectedText = selection.extractContents();
+        let tag = document.createElement(tagname);
+
+        /* get text content of window.selected */
+        let content = selectedText.textContent;
+
+        /* work with regex to validate user selected text with content editable text */
+        let regex = new RegExp(content);
+        let resultValidation = regex.test(mainContent);
+
+        /*this condition for check top tip*/
+        if (resultValidation === true) {
+            /* when result validation variable is true its mine user input is right change user value */
+            tag.innerHTML = selectedText.textContent;
+            console.log(tag);
+            selection.insertNode(tag);
+            if (selectedText.childNodes[1] !== undefined) {
+                console.log(selectedText.childNodes[1]);
+                selectedText.childNodes[1].removeChild(selectedText);
+            }
+
+        } else {
+            console.log("is false");
+        }
+    } else {
+        console.log("please change to content editable ");
+    }
+}
+
 /* event for use files */
 function bold() {
     document.execCommand("bold");
@@ -153,7 +211,7 @@ function addProperty(property) {
         properties.setAttribute("onclick", property.func);
         properties.innerText = property.ico;
         let icon = document.createElement("i");
-        icon.setAttribute("class" , property.ico);
+        icon.setAttribute("class", property.ico);
         properties.appendChild(icon);
     } else if (property.tag === "select") {
         property.select.forEach(function (value) {
@@ -193,7 +251,7 @@ function addEditorFeature(feature) {
             addProperty({"tag": "button", "func": "heading()", "ico": "H"});
             break;
         case "strikeThrough":
-            addProperty({"tag":"button","func":"strikeThrough()" , "ico":"s"});
+            addProperty({"tag": "button", "func": "strikeThrough()", "ico": "s"});
             break;
         default:
             throw "invalid property";
@@ -236,22 +294,22 @@ function exportContent() {
 
 }
 
-function runEditor() {
-    getElement("editable").addEventListener("click", function () {
-        if (getElement("main").contentEditable === "false") {
-            editor({
-                "edit": {
-                    "id": "main"
-                },
-                "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left", "heading" , "strikeThrough"]
-            });
-        } else {
-            getElement("main").contentEditable = "false";
-            //removeEditorStyle();
-        }
+// function runEditor() {
+//     getElement("editable").addEventListener("click", function () {
+//         if (getElement("main").contentEditable === "false") {
+//             editor({
+//                 "edit": {
+//                     "id": "main"
+//                 },
+//                 "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left", "heading" , "strikeThrough"]
+//             });
+//         } else {
+//             getElement("main").contentEditable = "false";
+//             //removeEditorStyle();
+//         }
+//
+//     });
+//
+// }
 
-    });
-
-}
-
-runEditor();
+// runEditor();

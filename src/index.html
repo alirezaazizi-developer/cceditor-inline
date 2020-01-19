@@ -14,59 +14,17 @@
 <div id="main" contenteditable="true">
     hello this is a simple javascript text editor for use easy and
 </div>
-<button id="data">selection</button>
+<button id="data" onclick='inputText({tag:"b",editable:"main"});'>selection</button>
 <!--<div id="btn">-->
 <!--    <div id="edit">-->
 <!--        <button id="editable"><i class="demo-icon icon-align-justify"></i>ا</button>-->
 <!--    </div>-->
 <!--</div>-->
 <!--<script src="./vue.js"></script>-->
-<!--<script src="./editor.js"></script>-->
+<script src="./editor.js"></script>
 <script>
 
-    function main(options) {
-        /* at first step get text value in container */
-        let main = document.getElementById(options.editable).innerText;
-        console.log(main);
-        /* this condition when run if dis div content editable is true */
-        if (document.getElementById(options.editable).contentEditable === "true") {
 
-            /* second step get value selection */
-            let selection = window.getSelection().getRangeAt(0);
-            let selectedText = selection.extractContents();
-            let tag = document.createElement(options.tag);
-
-            /* get text content of window.selected */
-            let content = selectedText.textContent;
-
-            /* work with regex to validate user selected text with content editable text */
-            let regex = new RegExp(content);
-            let resultValidation = regex.test(main);
-
-            /*this condition for check top tip*/
-            if (resultValidation === true) {
-                /* when result validation variable is true its mine user input is right change user value */
-                tag.innerHTML = selectedText.textContent;
-                console.log(tag);
-                selection.insertNode(tag);
-                if (selectedText.childNodes[1] !== undefined) {
-                    console.log(selectedText.childNodes[1]);
-                    selectedText.childNodes[1].removeChild(selectedText);
-                }
-
-            } else {
-                console.log("is false");
-            }
-        } else {
-            console.log("please change to content editable ");
-        }
-    }
-
-    document.getElementById("data").addEventListener("click", function () {
-        main({editable:"main" , tag:"i"});
-        main({editable:"main" , tag:"b"});
-    })
-    ;
 </script>
 </body>
 </html>
