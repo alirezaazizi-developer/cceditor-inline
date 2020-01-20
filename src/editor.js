@@ -33,9 +33,6 @@ function editorOption(options) {
         /* generate tag for add style and feature */
         let tag = document.createElement("span");
 
-        /* an instance from created tag */
-        tag.style.color = "red";
-
         /* add style */
         /* this switch can add style to text editor*/
         switch (options.feature) {
@@ -45,6 +42,15 @@ function editorOption(options) {
                 break;
             case "italic":
                 tag.style.fontStyle = "italic";
+                break;
+            case "underline":
+                tag.style.textDecoration = "underline";
+                break;
+            case "justify-center":
+                // tag.style.
+                break;
+            case "strike":
+                tag.style.textDecoration = "line-through";
                 break;
             default:
                 throw ("have Error in editorOption function in classname variable");
@@ -70,10 +76,10 @@ function editorOption(options) {
             }
 
         } else {
-            console.log("is false");
+            throw ("in editorOption function resultValidation variable return false please try to edit");
         }
     } else {
-        console.log("please change to content editable ");
+        throw ("please change to content editable ");
     }
 }
 
@@ -96,7 +102,7 @@ function createLink() {
 
 /* function strike */
 function strikeThrough() {
-    document.execCommand("strikeThrough");
+    editorOption({feature: "strike", editable: "main"});
 }
 
 /* function for justifies */
@@ -119,7 +125,7 @@ function fontFamily() {
 
 /* function underline */
 function underline() {
-    document.execCommand("underline");
+    editorOption({feature: "underline", editable: "main"})
 }
 
 /* function unlink */
