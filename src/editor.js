@@ -14,89 +14,97 @@ function tagExist(property) {
 }
 
 /* under function get user selection and change or add tag or remove tag or style */
-function editorOption(options) {
+let editorWorkstation = {
+    editorOption(options) {
 
-    /* at first step get text value in container */
-    let mainContent = document.getElementById(options.editable).innerText;
-    // console.log(mainContent);
-    /* this condition when run if dis div content editable is true */
-    if (document.getElementById(options.editable).contentEditable === "true") {
+        /* at first step get text value in container */
+        let mainContent = document.getElementById(options.editable).innerText;
+        // console.log(mainContent);
+        /* this condition when run if dis div content editable is true */
+        if (document.getElementById(options.editable).contentEditable === "true") {
 
-        /* second step get value selection */
-        let selection = document.getSelection().getRangeAt(0);
-        let selectedText = selection.extractContents();
+            /* second step get value selection */
+            let selection = document.getSelection().getRangeAt(0);
+            let selectedText = selection.extractContents();
 
-        /* check text selected is null*/
+            /* check text selected is null*/
 
 
-        /* generate tag for add style and feature */
-        /* init a variable for assignment tag and tag properties and attribute */
-        let tag;
-        if (options.feature == "h1") {
-            console.log("heading");
-        } else {
+            /* generate tag for add style and feature */
+            /* init a variable for assignment tag and tag properties and attribute */
+            let tag;
+            if (options.feature == "h1" || options.feature == "h2" ||options.feature == "h3") {
+                /* */
+                tag = document.createElement(options.feature);
 
-            tag = document.createElement("span");
-            /* add style */
-            /* this switch can add style to text editor*/
-            switch (options.feature) {
-                /* when is bold */
-                case "bold":
-                    tag.style.fontWeight = "bold";
-                    break;
-                case "italic":
-                    tag.style.fontStyle = "italic";
-                    break;
-                case "underline":
-                    tag.style.textDecoration = "underline";
-                    break;
-                case "justify-center":
-                    // tag.style.
-                    break;
-                case "strike":
-                    tag.style.textDecoration = "line-through";
-                    break;
-                default:
-                    throw ("have Error in editorOption function in classname variable");
+
+
+            } else {
+
+                tag = document.createElement("span");
+                /* add style */
+                /* this switch can add style to text editor*/
+                switch (options.feature) {
+                    /* when is bold */
+                    case "bold":
+                        tag.style.fontWeight = "bold";
+                        break;
+                    case "italic":
+                        tag.style.fontStyle = "italic";
+                        break;
+                    case "underline":
+                        tag.style.textDecoration = "underline";
+                        break;
+                    case "justify-center":
+                        // tag.style.
+                        break;
+                    case "strike":
+                        tag.style.textDecoration = "line-through";
+                        break;
+                    default:
+                        throw ("have Error in editorOption function in classname variable");
+
+                }
 
             }
 
-        }
+            /* get text content of window.selected */
+            let content = selectedText.toString();
 
-        /* get text content of window.selected */
-        let content = selectedText.toString();
+            /* work with regex to validate user selected text with content editable text */
+            let regex = new RegExp(content);
+            let resultValidation = regex.test(mainContent);
 
-        /* work with regex to validate user selected text with content editable text */
-        let regex = new RegExp(content);
-        let resultValidation = regex.test(mainContent);
 
-        /*this condition for check top tip*/
-        if (resultValidation === true) {
-            /* when result validation variable is true its mine user input is right change user value */
-            tag.innerHTML = selectedText.textContent;
-            selection.insertNode(tag);
-            console.log(selectedText.childNodes[0].wholeText);
-            if (selectedText.childNodes[1] !== undefined) {
-                console.log(selectedText.childNodes[1]);
-                selectedText.childNodes[1].removeChild(selectedText);
+
+
+            /*this condition for check top tip*/
+            if (resultValidation === true) {
+                /* when result validation variable is true its mine user input is right change user value */
+                tag.innerHTML = selectedText.textContent;
+                selection.insertNode(tag);
+
+                if (selectedText.childNodes[1] !== undefined) {
+
+                    selectedText.childNodes[1].removeChild(selectedText);
+                }
+
+            } else {
+                throw ("in editorOption function resultValidation variable return false please try to edit");
             }
-
         } else {
-            throw ("in editorOption function resultValidation variable return false please try to edit");
+            throw ("please change to content editable ");
         }
-    } else {
-        throw ("please change to content editable ");
     }
 }
-
 /* event for use files */
 function bold() {
-    editorOption({feature: "bold", editable: "main"});
+    editorWorkstation.editorOption({feature: "bold", editable: "main"});
 }
 
 /* func for italic */
 function italic() {
-    editorOption({feature: "italic", editable: "main"});
+    editorWorkstation.editorOption({feature: "italic", editable: "main"});
 }
 
 /* function create for external link */
@@ -108,7 +116,7 @@ function createLink() {
 
 /* function strike */
 function strikeThrough() {
-    editorOption({feature: "strike", editable: "main"});
+    editorWorkstation.editorOption({feature: "strike", editable: "main"});
 }
 
 /* function for justifies */
@@ -131,7 +139,7 @@ function fontFamily() {
 
 /* function underline */
 function underline() {
-    editorOption({feature: "underline", editable: "main"})
+    editorWorkstation.editorOption({feature: "underline", editable: "main"})
 }
 
 /* function unlink */
@@ -151,8 +159,8 @@ function color(value) {
 
 /* function for heading */
 function heading() {
-    let value = prompt("please write your tag");
-    document.execCommand("heading", false, "H3");
+    let value = prompt("please write your heading");
+    editorWorkstation.editorOption({feature:value , editable:"main"});
 }
 
 function addImage() {

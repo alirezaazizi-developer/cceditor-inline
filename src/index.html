@@ -28,7 +28,16 @@
         which.</p>
 </div>
 
+<div>
+    <div id="content" style="border-top: 10px solid red"></div>
+    <button id="set">click to watch result</button>
+</div>
 <script src="./editor.js"></script>
+<script>
+    getElement("set").addEventListener("click" , function () {
+        getElement("content").innerHTML = exportContent("main");
+    });
+</script>
 </body>
 
 </html>
