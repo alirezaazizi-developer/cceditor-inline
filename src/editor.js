@@ -3,17 +3,26 @@
  * @author AlirezaAzizi
  **/
 
+/* function for not exist any tag */
+function tagExist(property) {
+
+    let tag = document.getElementById(property.tagId);
+
+    tag.childNodes.forEach(function (e) {
+
+    });
+}
 
 /* under function get user selection and change or add tag or remove tag or style */
 function inputText(options) {
     /* this variable use for */
     let tagname;
     /* under switch for assignment tag name in a variable */
-    switch (options.tag) {
-        case "b":
+    switch (options.feature) {
+        case "bold":
             tagname = "b";
             break;
-        case "i":
+        case "italic":
             tagname = "i";
             break;
         default:
@@ -29,6 +38,7 @@ function inputText(options) {
         let selection = document.getSelection().getRangeAt(0);
         let selectedText = selection.extractContents();
         let tag = document.createElement(tagname);
+
 
         /* get text content of window.selected */
         let content = selectedText.textContent;
@@ -83,7 +93,7 @@ function justifyRight() {
     document.execCommand("justifyRight");
 }
 
-function justifyLeft() {
+    function justifyLeft() {
     document.execCommand("justifyLeft");
 }
 
@@ -282,7 +292,7 @@ function editor(attributes) {
             addEditorFeature(properties);
         });
     } else {
-        console.log("editor exist");
+        console.log("editor exist don't try ");
     }
 }
 
