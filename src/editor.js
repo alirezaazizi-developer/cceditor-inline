@@ -28,19 +28,22 @@ function editorOption(options) {
 
         /* check text selected is null*/
 
-        console.log("selected text", selectedText.toString());
+        console.log("selected text", selectedText);
 
         /* generate tag for add style and feature */
-        let tag = document.createElement("span");
-
+        /* init a variable for assignment tag and tag properties and attribute */
+        let tag;
         /* add style */
         /* this switch can add style to text editor*/
         switch (options.feature) {
             /* when is bold */
             case "bold":
+                tag = document.createElement("span");
                 tag.style.fontWeight = "bold";
+                console.log(tag);
                 break;
             case "italic":
+                tag = document.createElement("span");
                 tag.style.fontStyle = "italic";
                 break;
             case "underline":
@@ -68,7 +71,6 @@ function editorOption(options) {
         if (resultValidation === true) {
             /* when result validation variable is true its mine user input is right change user value */
             tag.innerHTML = selectedText.textContent;
-            console.log(tag);
             selection.insertNode(tag);
             if (selectedText.childNodes[1] !== undefined) {
                 console.log(selectedText.childNodes[1]);
