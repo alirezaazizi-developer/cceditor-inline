@@ -15,39 +15,44 @@ function tagExist(property) {
 
 /* under function get user selection and change or add tag or remove tag or style */
 function editorOption(options) {
-    /* this variable use for */
-    let classname;
-    /* under switch for assignment tag name in a variable */
-    switch (options.feature) {
-        case "bold":
-            classname = {style:""};
-            break;
-        case "italic":
-            classname = "i";
-            break;
-        default:
-            throw ("HTML tag is not defined");
-    }
+
     /* at first step get text value in container */
     let mainContent = document.getElementById(options.editable).innerText;
-    console.log(mainContent);
+    // console.log(mainContent);
     /* this condition when run if dis div content editable is true */
     if (document.getElementById(options.editable).contentEditable === "true") {
 
         /* second step get value selection */
         let selection = document.getSelection().getRangeAt(0);
         let selectedText = selection.extractContents();
+
+        /* check text selected is null*/
+
+        console.log("selected text", selectedText.toString());
+
+        /* generate tag for add style and feature */
         let tag = document.createElement("span");
 
         /* an instance from created tag */
-        let style = tag.style;
-        
+        tag.style.color = "red";
+
         /* add style */
-        tag.style.backgroundColor = "red";
-        tag.style.color = "blue";
+        /* this switch can add style to text editor*/
+        switch (options.feature) {
+            /* when is bold */
+            case "bold":
+                tag.style.fontWeight = "bold";
+                break;
+            case "italic":
+                tag.style.fontStyle = "italic";
+                break;
+            default:
+                throw ("have Error in editorOption function in classname variable");
+
+        }
 
         /* get text content of window.selected */
-        let content = selectedText.textContent;
+        let content = selectedText.toString();
 
         /* work with regex to validate user selected text with content editable text */
         let regex = new RegExp(content);
@@ -74,12 +79,12 @@ function editorOption(options) {
 
 /* event for use files */
 function bold() {
-    document.execCommand("bold");
+    editorOption({feature: "bold", editable: "main"});
 }
 
 /* func for italic */
 function italic() {
-    document.execCommand("italic");
+    editorOption({feature: "italic", editable: "main"});
 }
 
 /* function create for external link */
@@ -149,7 +154,6 @@ function addImage() {
 function getElement(id) {
     return document.getElementById(id);
 }
-
 
 
 /* function remove user input this function when effected user input window opened */
