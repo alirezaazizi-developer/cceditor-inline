@@ -40,8 +40,8 @@ function inputText(options) {
         let tag = document.createElement("span");
 
         /* add style */
-        tag.setAttribute("style", "background:red");
-        tag.setAttribute("style", "color:#ffffff");
+        tag.style.backgroundColor = "red";
+        tag.style.color = "blue";
 
         /* get text content of window.selected */
         let content = selectedText.textContent;
@@ -147,54 +147,6 @@ function getElement(id) {
     return document.getElementById(id);
 }
 
-/* function http validation */
-
-function httpValidator(input) {
-    let regex = /^((http|https)+)$/;
-    // when matched return true
-    // else return false
-}
-
-/* function get  user input */
-
-function userInput(values) {
-    let frame = document.createElement("div");
-    frame.setAttribute("id", "user-input");
-    /* create title for user input */
-    let title = document.createElement("div");
-    title.setAttribute("id", "user-input-title");
-    title.innerText = values.title;
-    /* create input for users */
-    let input = document.createElement("div");
-    input.setAttribute("id", "main-user-input");
-    /**/
-    let inputTag = document.createElement("input");
-    inputTag.setAttribute("id", "editor-client-input");
-
-    /* btn for run user commands */
-    let saveButton = document.createElement("button");
-    saveButton.setAttribute("type", "button");
-    saveButton.setAttribute("id", "save-client-value");
-    saveButton.setAttribute("onclick", "saveUserInput()");
-    saveButton.innerText = "ذخیره";
-
-    let cancelButton = document.createElement("button");
-    cancelButton.setAttribute("type", "button");
-    cancelButton.setAttribute("id", "cancel-client-value");
-    cancelButton.setAttribute("onclick", "removeUserInput()");
-    cancelButton.innerText = "خروج";
-
-    /* append child */
-
-    document.body.appendChild(frame);
-    getElement("user-input").appendChild(title);
-    getElement("user-input").appendChild(input);
-    input.appendChild(inputTag);
-    input.appendChild(saveButton);
-    input.appendChild(cancelButton);
-
-
-}
 
 
 /* function remove user input this function when effected user input window opened */
@@ -219,20 +171,19 @@ function removeEditorStyle() {
 
 
 function addProperty(property) {
-    let properties = document.createElement(property.tag);
+    let option = document.createElement(property.tag);
     if (property.tag === "button") {
-        properties.setAttribute("onclick", property.func);
-        properties.innerText = property.ico;
+        option.setAttribute("onclick", property.func);
         let icon = document.createElement("i");
         icon.setAttribute("class", property.ico);
-        properties.appendChild(icon);
+        option.appendChild(icon);
     } else if (property.tag === "select") {
         property.select.forEach(function (value) {
-            properties.innerHTML += value;
+            option.innerHTML += value;
         });
     }
     /* append child */
-    getElement("editor").appendChild(properties);
+    getElement("editor").appendChild(option);
 }
 
 /* this is a switch  */
@@ -246,25 +197,25 @@ function addEditorFeature(feature) {
             addProperty({"tag": "button", "func": "italic()", "ico": "icon-italic"});
             break;
         case "underline":
-            addProperty({"tag": "button", "func": "underline()", "ico": "u"});
+            addProperty({"tag": "button", "func": "underline()", "ico": "icon-underline"});
             break;
         case "link":
-            addProperty({"tag": "button", "func": "createLink()", "ico": "l"});
+            addProperty({"tag": "button", "func": "createLink()", "ico": "icon-link"});
             break;
         case "justify-right":
-            addProperty({"tag": "button", "func": "justifyRight()", "ico": "R"});
+            addProperty({"tag": "button", "func": "justifyRight()", "ico": "icon-align-right"});
             break;
         case "justify-center":
-            addProperty({"tag": "button", "func": "justifyCenter()", "ico": "C"});
+            addProperty({"tag": "button", "func": "justifyCenter()", "ico": "icon-align-center"});
             break;
         case "justify-left":
-            addProperty({"tag": "button", "func": "justifyLeft()", "ico": "L"});
+            addProperty({"tag": "button", "func": "justifyLeft()", "ico": "icon-align-left"});
             break;
         case "heading":
-            addProperty({"tag": "button", "func": "heading()", "ico": "H"});
+            addProperty({"tag": "button", "func": "heading()", "ico": "icon-header"});
             break;
         case "strikeThrough":
-            addProperty({"tag": "button", "func": "strikeThrough()", "ico": "s"});
+            addProperty({"tag": "button", "func": "strikeThrough()", "ico": "icon-strike"});
             break;
         default:
             throw "invalid property";
