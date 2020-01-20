@@ -1,0 +1,10 @@
+#################################################################
+
+This file help you are for use this editor
+
+#################################################################
+
+exportContent(exportId) this function return your needed value
+and exportId is target tag (this tag content editable tag id )
+
+*****************************************************************

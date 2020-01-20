@@ -266,7 +266,7 @@ function editor(attributes) {
 }
 
 
-/* content export */
+/* under function for content export */
 function exportContent(exportId) {
 
     return getElement(exportId).innerHTML;
@@ -282,7 +282,7 @@ function runEditor() {
             "edit": {
                 "id": "main"
             },
-            "attributes": ["bold", "italic", "underline", "strikeThrough", "link", "justify-center", "justify-right", "justify-left", "heading"]
+            "attributes": ["bold", "italic", "underline", "strikeThrough","heading","link", "justify-center", "justify-right", "justify-left"]
         });
     } else {
         getElement("main").contentEditable = "false";
