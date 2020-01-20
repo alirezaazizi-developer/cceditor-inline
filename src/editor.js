@@ -267,11 +267,14 @@ function editor(attributes) {
 
 
 /* content export */
-function exportContent() {
+function exportContent(exportId) {
 
-    return getElement()
+    return getElement(exportId).innerHTML;
 
 }
+
+
+
 
 function runEditor() {
     if (getElement("main").contentEditable === "true") {
@@ -279,7 +282,7 @@ function runEditor() {
             "edit": {
                 "id": "main"
             },
-            "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left", "heading", "strikeThrough"]
+            "attributes": ["bold", "italic", "underline", "strikeThrough", "link", "justify-center", "justify-right", "justify-left", "heading"]
         });
     } else {
         getElement("main").contentEditable = "false";

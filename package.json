@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/alirezaazizi-developer/cceditor-inline#readme",
   "dependencies": {
+    "a-color-picker": "^1.2.1",
     "webpack": "^5.0.0-beta.12",
     "webpack-cli": "^3.3.10"
   }

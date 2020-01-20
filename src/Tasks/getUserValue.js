@@ -1,5 +1,4 @@
 /* function get  user input */
-
 function userInput(values) {
     let frame = document.createElement("div");
     frame.setAttribute("id", "user-input");
