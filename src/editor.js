@@ -28,35 +28,38 @@ function editorOption(options) {
 
         /* check text selected is null*/
 
-        console.log("selected text", selectedText);
 
         /* generate tag for add style and feature */
         /* init a variable for assignment tag and tag properties and attribute */
         let tag;
-        /* add style */
-        /* this switch can add style to text editor*/
-        switch (options.feature) {
-            /* when is bold */
-            case "bold":
-                tag = document.createElement("span");
-                tag.style.fontWeight = "bold";
-                console.log(tag);
-                break;
-            case "italic":
-                tag = document.createElement("span");
-                tag.style.fontStyle = "italic";
-                break;
-            case "underline":
-                tag.style.textDecoration = "underline";
-                break;
-            case "justify-center":
-                // tag.style.
-                break;
-            case "strike":
-                tag.style.textDecoration = "line-through";
-                break;
-            default:
-                throw ("have Error in editorOption function in classname variable");
+        if (options.feature == "h1") {
+            console.log("heading");
+        } else {
+
+            tag = document.createElement("span");
+            /* add style */
+            /* this switch can add style to text editor*/
+            switch (options.feature) {
+                /* when is bold */
+                case "bold":
+                    tag.style.fontWeight = "bold";
+                    break;
+                case "italic":
+                    tag.style.fontStyle = "italic";
+                    break;
+                case "underline":
+                    tag.style.textDecoration = "underline";
+                    break;
+                case "justify-center":
+                    // tag.style.
+                    break;
+                case "strike":
+                    tag.style.textDecoration = "line-through";
+                    break;
+                default:
+                    throw ("have Error in editorOption function in classname variable");
+
+            }
 
         }
 
@@ -72,6 +75,7 @@ function editorOption(options) {
             /* when result validation variable is true its mine user input is right change user value */
             tag.innerHTML = selectedText.textContent;
             selection.insertNode(tag);
+            console.log(selectedText.childNodes[0].wholeText);
             if (selectedText.childNodes[1] !== undefined) {
                 console.log(selectedText.childNodes[1]);
                 selectedText.childNodes[1].removeChild(selectedText);
