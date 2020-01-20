@@ -14,13 +14,13 @@ function tagExist(property) {
 }
 
 /* under function get user selection and change or add tag or remove tag or style */
-function inputText(options) {
+function editorOption(options) {
     /* this variable use for */
     let classname;
     /* under switch for assignment tag name in a variable */
     switch (options.feature) {
         case "bold":
-            classname = "b";
+            classname = {style:""};
             break;
         case "italic":
             classname = "i";
@@ -39,6 +39,9 @@ function inputText(options) {
         let selectedText = selection.extractContents();
         let tag = document.createElement("span");
 
+        /* an instance from created tag */
+        let style = tag.style;
+        
         /* add style */
         tag.style.backgroundColor = "red";
         tag.style.color = "blue";
