@@ -16,14 +16,14 @@ function tagExist(property) {
 /* under function get user selection and change or add tag or remove tag or style */
 function inputText(options) {
     /* this variable use for */
-    let tagname;
+    let classname;
     /* under switch for assignment tag name in a variable */
     switch (options.feature) {
         case "bold":
-            tagname = "b";
+            classname = "b";
             break;
         case "italic":
-            tagname = "i";
+            classname = "i";
             break;
         default:
             throw ("HTML tag is not defined");
@@ -37,8 +37,11 @@ function inputText(options) {
         /* second step get value selection */
         let selection = document.getSelection().getRangeAt(0);
         let selectedText = selection.extractContents();
-        let tag = document.createElement(tagname);
+        let tag = document.createElement("span");
 
+        /* add style */
+        tag.setAttribute("style", "background:red");
+        tag.setAttribute("style", "color:#ffffff");
 
         /* get text content of window.selected */
         let content = selectedText.textContent;
@@ -93,7 +96,7 @@ function justifyRight() {
     document.execCommand("justifyRight");
 }
 
-    function justifyLeft() {
+function justifyLeft() {
     document.execCommand("justifyLeft");
 }
 
@@ -237,10 +240,10 @@ function addProperty(property) {
 function addEditorFeature(feature) {
     switch (feature) {
         case "bold":
-            addProperty({"tag": "button", "func": "bold()", "ico": "icon-heart-empty"});
+            addProperty({"tag": "button", "func": "bold()", "ico": "icon-bold"});
             break;
         case "italic":
-            addProperty({"tag": "button", "func": "italic()", "ico": "i"});
+            addProperty({"tag": "button", "func": "italic()", "ico": "icon-italic"});
             break;
         case "underline":
             addProperty({"tag": "button", "func": "underline()", "ico": "u"});
@@ -273,10 +276,6 @@ function addEditorFeature(feature) {
 function editor(attributes) {
     if (getElement("editor") == null) {
 
-        /* get parent text content edit able */
-        let editedWidth = getElement(edit.id).style.width;
-        alert(editedWidth);
-
 
         let editor = document.createElement("div");
         editor.setAttribute("id", "editor");
@@ -304,22 +303,20 @@ function exportContent() {
 
 }
 
-// function runEditor() {
-//     getElement("editable").addEventListener("click", function () {
-//         if (getElement("main").contentEditable === "false") {
-//             editor({
-//                 "edit": {
-//                     "id": "main"
-//                 },
-//                 "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left", "heading" , "strikeThrough"]
-//             });
-//         } else {
-//             getElement("main").contentEditable = "false";
-//             //removeEditorStyle();
-//         }
-//
-//     });
-//
-// }
+function runEditor() {
+    if (getElement("main").contentEditable === "true") {
+        editor({
+            "edit": {
+                "id": "main"
+            },
+            "attributes": ["bold", "italic", "underline", "link", "justify-center", "justify-right", "justify-left", "heading", "strikeThrough"]
+        });
+    } else {
+        getElement("main").contentEditable = "false";
+        //removeEditorStyle();
+    }
 
-// runEditor();
+
+}
+
+runEditor();
