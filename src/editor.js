@@ -33,10 +33,9 @@ let editorWorkstation = {
             /* generate tag for add style and feature */
             /* init a variable for assignment tag and tag properties and attribute */
             let tag;
-            if (options.feature == "h1" || options.feature == "h2" ||options.feature == "h3") {
+            if (options.feature == "h1" || options.feature == "h2" || options.feature == "h3") {
                 /* */
                 tag = document.createElement(options.feature);
-
 
 
             } else {
@@ -76,8 +75,6 @@ let editorWorkstation = {
             let resultValidation = regex.test(mainContent);
 
 
-
-
             /*this condition for check top tip*/
             if (resultValidation === true) {
                 /* when result validation variable is true its mine user input is right change user value */
@@ -95,8 +92,20 @@ let editorWorkstation = {
         } else {
             throw ("please change to content editable ");
         }
+    },
+
+    /* this function for create select tag */
+    selectedOption(children) {
+        let tag = document.createElement("select");
+        children.child.forEach(function () {
+
+        });
+        /* append children*/
+        getElement("editor").appendChild(tag);
+
     }
 }
+
 /* event for use files */
 function bold() {
     editorWorkstation.editorOption({feature: "bold", editable: "main"});
@@ -160,7 +169,7 @@ function color(value) {
 /* function for heading */
 function heading() {
     let value = prompt("please write your heading");
-    editorWorkstation.editorOption({feature:value , editable:"main"});
+    editorWorkstation.editorOption({feature: value, editable: "main"});
 }
 
 function addImage() {
@@ -282,15 +291,13 @@ function exportContent(exportId) {
 }
 
 
-
-
 function runEditor() {
     if (getElement("main").contentEditable === "true") {
         editor({
             "edit": {
                 "id": "main"
             },
-            "attributes": ["bold", "italic", "underline", "strikeThrough","heading","link", "justify-center", "justify-right", "justify-left"]
+            "attributes": ["bold", "italic", "underline", "strikeThrough", "heading", "link", "justify-center", "justify-right", "justify-left"]
         });
     } else {
         getElement("main").contentEditable = "false";
