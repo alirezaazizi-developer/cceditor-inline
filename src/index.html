@@ -19,19 +19,17 @@
         z-index: 9999;
     }
     #editor-input{
-        background-color: #ffffff;
+        display: none;
         box-shadow: 1px 1px 1px 1px #888888 ;
-        margin: 20rem;
+        margin: 0rem;
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         
     }
-    body {
-        background-color: #EFE9E7;
-    }
     .picker {
+        padding-right: revert;
         display: inline-block;
         box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(3, 1, 1, 0.08);
     }
@@ -75,7 +73,7 @@
     });
     AColorPicker.from('.picker')
         .on('change', (picker, color) => {
-            console.log(color);
+            getElement("main").style.backgroundColor = color;
         });
 </script>
 </body>

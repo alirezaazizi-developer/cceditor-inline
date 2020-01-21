@@ -3,6 +3,12 @@
  * @author AlirezaAzizi
  **/
 
+import events from "./Tasks/events";
+
+/* create instance from events */
+let events = new events();
+
+/**/
 
 /* under function get user selection and change or add tag or remove tag or style */
 let editorWorkstation = {
@@ -130,7 +136,7 @@ function removeEditorStyle() {
 function addProperty(property) {
     let option = document.createElement(property.tag);
     if (property.tag === "button") {
-        option.setAttribute("onclick", property.func);
+        option.setAttribute("id", property.id);
         let icon = document.createElement("i");
         icon.setAttribute("class", property.ico);
         option.appendChild(icon);
@@ -148,7 +154,7 @@ function addProperty(property) {
 function addEditorFeature(feature) {
     switch (feature) {
         case "bold":
-            addProperty({"tag": "button", "func": "bold()", "ico": "icon-bold"});
+            addProperty({"tag": "button", "id": "editor-bold", "ico": "icon-bold"});
             break;
         case "italic":
             addProperty({"tag": "button", "func": "italic()", "ico": "icon-italic"});
@@ -173,6 +179,9 @@ function addEditorFeature(feature) {
             break;
         case "strikeThrough":
             addProperty({"tag": "button", "func": "strikeThrough()", "ico": "icon-strike"});
+            break;
+        case"color":
+            addProperty({"tag": "button", "func": "alert('hello world')", "ico": "icon-strike"});
             break;
         default:
             throw "invalid property";
@@ -218,7 +227,7 @@ function runEditor() {
             "edit": {
                 "id": "main"
             },
-            "attributes": ["bold", "italic", "underline", "strikeThrough", "heading", "link", "justify-center", "justify-right", "justify-left"]
+            "attributes": ["bold", "italic", "underline","color" ,"strikeThrough", "heading", "link", "justify-center", "justify-right", "justify-left"]
         });
     } else {
         getElement("main").contentEditable = "false";
@@ -229,3 +238,10 @@ function runEditor() {
 }
 
 runEditor();
+
+
+/**/
+/* bold event */
+getElement("editor-bold").addEventListener("click" , function () {
+    events.bold();
+});
