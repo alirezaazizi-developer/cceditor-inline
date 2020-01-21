@@ -55,7 +55,7 @@ let editorWorkstation = {
                         tag.style.textDecoration = "underline";
                         break;
                     case "justify-center":
-                        // tag.style.
+                        tag.style.textAlign = "center";
                         break;
                     case "strike":
                         tag.style.textDecoration = "line-through";
@@ -81,6 +81,7 @@ let editorWorkstation = {
                 tag.innerHTML = selectedText.textContent;
                 selection.insertNode(tag);
 
+                 console.log(selectedText.childNodes);
                 if (selectedText.childNodes[1] !== undefined) {
 
                     selectedText.childNodes[1].removeChild(selectedText);
@@ -108,6 +109,13 @@ let editorWorkstation = {
 
 /* event for use files */
 function bold() {
+    let re = true;
+    if (re === true){
+        alert("is true");
+    }else {
+        alert("is false");
+    }
+
     editorWorkstation.editorOption({feature: "bold", editable: "main"});
 }
 
@@ -138,7 +146,7 @@ function justifyLeft() {
 }
 
 function justifyCenter() {
-    document.execCommand("justifyCenter");
+    editorWorkstation.editorOption({feature:"justify-center",editable:"main"});
 }
 
 /* font family */
