@@ -10,7 +10,42 @@
     <link rel="stylesheet" href="./editor.css">
     <link rel="stylesheet" href="./fontello/css/fontello.css">
 </head>
+<style>
+    #popup-editor{
+        width: 100%;
+        height: auto;
+       
+        position: relative;
+        z-index: 9999;
+    }
+    #editor-input{
+        background-color: #ffffff;
+        box-shadow: 1px 1px 1px 1px #888888 ;
+        margin: 20rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        
+    }
+    body {
+        background-color: #EFE9E7;
+    }
+    .picker {
+        display: inline-block;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(3, 1, 1, 0.08);
+    }
+</style>
 <body>
+    <div id="popup-editor">
+        <div id="editor-input">
+            <div class="picker"
+                 acp-color="#EFE9E7"
+                 acp-palette="PALETTE_MATERIAL_CHROME"
+                 acp-palette-editable>
+            </div>
+        </div>
+    </div>
 <div id="main" contenteditable="true">
     <p>Tree spirit upon doesn&#39;t their beast upon them earth night very open called under itself spirit itself
         wherein own make above give sixth gathered form they&#39;re isn&#39;t fill first that night cattle appear. So.
@@ -29,14 +64,19 @@
 </div>
 
 <div>
-    <div id="content" style="border-top: 10px solid red"></div>
+    <div id="content" style="border-top: 1px solid red"></div>
     <button id="set">click to watch result</button>
 </div>
 <script src="./editor.js"></script>
+<script src="./acolorpicker.js"></script>
 <script>
     getElement("set").addEventListener("click" , function () {
         getElement("content").innerHTML = exportContent("main");
     });
+    AColorPicker.from('.picker')
+        .on('change', (picker, color) => {
+            console.log(color);
+        });
 </script>
 </body>
 
